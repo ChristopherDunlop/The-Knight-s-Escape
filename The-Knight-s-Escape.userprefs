@@ -1,14 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\levelGenerator.cs">
     <Files>
-      <File FileName="Assets\Scripts\gameController.cs" Line="10" Column="38" />
-      <File FileName="Assets\Scripts\levelGenerator.cs" Line="36" Column="25" />
-      <File FileName="Assets\Scripts\clickToMove.cs" Line="68" Column="6" />
+      <File FileName="Assets\Scripts\levelGenerator.cs" Line="93" Column="32" />
+      <File FileName="Assets\Scripts\gameController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\clickToMove.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Christopher\University Materials\4th Year\Honours Project\The-Knight-s-Escape\Assets\Scripts\levelGenerator.cs" line="91" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

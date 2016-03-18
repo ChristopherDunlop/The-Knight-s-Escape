@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\gameController.cs" />
      <Compile Include="Assets\Scripts\levelGenerator.cs" />
      <Compile Include="Assets\Scripts\mopController.cs" />
+     <None Include="Assets\Text Levels\ktTestLevel.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

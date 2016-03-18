@@ -105,6 +105,11 @@ public class clickToMove : MonoBehaviour {
 			playerPos.Set(x/100,y/100,0);
 			
 			GetComponent<Rigidbody2D> ().transform.position = playerPos;
+			Instantiate (mopBackground, (playerPos), Quaternion.identity);
+			
+			GameObject newBackground = GameObject.Find("Background(Clone)");
+			newBackground.name=("Background " + playerPos);
+			newBackground.transform.parent = smooth.transform;
 		}
 	}    
 }
