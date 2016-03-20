@@ -11,7 +11,8 @@ public class clickToMove : MonoBehaviour {
 	Vector3 playerPos;
 	Rigidbody2D player;
 	public List<Vector3> posList = new List<Vector3>();
-	public GameObject mopBackground, lava1, lava2;
+    public List<Vector3> backgroundList = new List<Vector3>();
+    public GameObject mopBackground, lava1, lava2;
 	GameObject gc, smooth, moppedSquares;
 	gameController levelScript;
 
@@ -32,8 +33,9 @@ public class clickToMove : MonoBehaviour {
 		float y2 = Mathf.Round(playerPos.y*100);
 		
 		playerPos.Set((x2)/100,(y2)/100,0);
-		//posList.Add (playerPos);
-		Instantiate (mopBackground, (playerPos), Quaternion.identity);
+		posList.Add (playerPos);
+        backgroundList.Add(playerPos);
+        Instantiate (mopBackground, (playerPos), Quaternion.identity);
 		
 		GameObject newBackground = GameObject.Find("Background(Clone)");
 		newBackground.name=("Background " + playerPos);
@@ -63,7 +65,8 @@ public class clickToMove : MonoBehaviour {
 				if (!posList.Contains(target)) {
 						movement = 1;
 						posList.Add (playerPos);
-						Instantiate (lava1, (playerPos), Quaternion.identity);
+
+                        Instantiate (lava1, (playerPos), Quaternion.identity);
 						GameObject newMopped = GameObject.Find("lava1(Clone)");
 						newMopped.name=("Lava1 " + playerPos);
 						newMopped.transform.parent = moppedSquares.transform;
@@ -105,11 +108,17 @@ public class clickToMove : MonoBehaviour {
 			playerPos.Set(x/100,y/100,0);
 			
 			GetComponent<Rigidbody2D> ().transform.position = playerPos;
-			Instantiate (mopBackground, (playerPos), Quaternion.identity);
-			
-			GameObject newBackground = GameObject.Find("Background(Clone)");
-			newBackground.name=("Background " + playerPos);
-			newBackground.transform.parent = smooth.transform;
+
+            if (!backgroundList.Contains(playerPos))
+            {
+                Instantiate(mopBackground, (playerPos), Quaternion.identity);
+
+                GameObject newBackground = GameObject.Find("Background(Clone)");
+                newBackground.name = ("Background " + playerPos);
+                newBackground.transform.parent = smooth.transform;
+                backgroundList.Add(playerPos);
+            }
+
 		}
 	}    
 }

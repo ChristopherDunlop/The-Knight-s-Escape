@@ -10,13 +10,21 @@ public class levelGenerator : MonoBehaviour {
 	public int mops = 0;
 	public int maxX, maxY;
 	private string[] entries, read;
-	public string fileName = "Text Levels/ktTestLevel.txt";
-	private List<int> wallList = new List<int>();
+    private string fileName = "C:/Christopher/University Materials/4th Year/Honours Project/The-Knight-s-Escape/Assets/Text Levels/ktTestLevel.txt";
+    //public FileInfo theSourceFile; 
+    //= new FileInfo("Test.txt");
+    //public string fileName = "Dave";
+    private List<int> wallList = new List<int>();
+    GameObject ctm;
+    clickToMove ls;
 
 	// Use this for initialization
 	void Start () {
 
-		if(Load (fileName)) System.Console.WriteLine("Level Loaded\n");;
+
+        GameObject Walls = new GameObject();
+        Walls.name = "Walls";
+        if (Load (fileName)) System.Console.WriteLine("Level Loaded\n");
 
 			GameObject Map = new GameObject ();
 			Map.name = ("Map Components");
@@ -82,29 +90,34 @@ public class levelGenerator : MonoBehaviour {
 			colliderpoints [4] = new Vector2 (-0.01f, -0.01f);
 			edgeCol.points = colliderpoints;
 
-			GameObject gc = GameObject.Find ("GameController");		
-			gameController levelScript = gc.GetComponent<gameController> ();
-			levelScript.toMop = mops - 1;
-			levelScript.maxX = maxX;
-			levelScript.maxY = maxY;
-
 			while (wallList.Count > 0) {
 
-				float fx = ((wallList[0] % width)*128)/100;
+            float fx = wallList[0] % width;
+                fx = (fx*128)/100;
 				float fy = ((Mathf.Round(wallList[0] / width))*128)/100;
 
 				Vector3 statonaryPos = new Vector3(fx, fy, 0f);
 
 				Instantiate (lava2, (statonaryPos), Quaternion.identity);
-				GameObject Walls = new GameObject ();
 				GameObject newMopped = GameObject.Find("lava2(Clone)");
 				newMopped.name=("Lava2 " + statonaryPos);
 				newMopped.transform.parent = Walls.transform;
-				wallList.Remove (wallList[0]);
+
+            ctm = GameObject.Find("Player");
+            ls = ctm.GetComponent<clickToMove>();
+            ls.posList.Add(statonaryPos);
+
+            wallList.Remove (wallList[0]);
 				mops--;
 			}
+            
+        GameObject gc = GameObject.Find("GameController");
+        gameController levelScript = gc.GetComponent<gameController>();
+        levelScript.toMop = mops - 1;
+        levelScript.maxX = maxX;
+        levelScript.maxY = maxY;
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -117,15 +130,16 @@ public class levelGenerator : MonoBehaviour {
 		try
 		{
 			string line;
-			// Create a new StreamReader, tell it which file to read and what encoding the file
-			// was saved as
-			StreamReader theReader = new StreamReader(fileName, Encoding.Default);
-			// Immediately clean up the reader after this block of code is done.
-			// You generally use the "using" statement for potentially memory-intensive objects
-			// instead of relying on garbage collection.
-			// (Do not confuse this with the using directive for namespace at the 
-			// beginning of a class!)
-			using (theReader)
+            // Create a new StreamReader, tell it which file to read and what encoding the file
+            // was saved as
+            //StreamReader thereader = theSourceFile.OpenText();
+            StreamReader theReader = new StreamReader(fileName, Encoding.Default);
+            // Immediately clean up the reader after this block of code is done.
+            // You generally use the "using" statement for potentially memory-intensive objects
+            // instead of relying on garbage collection.
+            // (Do not confuse this with the using directive for namespace at the 
+            // beginning of a class!)
+            using (theReader)
 			{
 				int hasRead = 0;
 				// While there's lines left in the text file, do this:
