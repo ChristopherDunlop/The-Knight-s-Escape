@@ -60,7 +60,7 @@ public class levelGenerator : MonoBehaviour {
 
 			for (float x = 0; x<randomX; x=x+128) {
 				for (float y = 0; y<randomY; y=y+128) {	
-					rndg = rnd.Next (1, 4);
+					rndg = rnd.Next (1, 5);
 
 					if (rndg == 1) {
 						Instantiate (gem1, new Vector3 (x / 100, y / 100, 0), Quaternion.identity);
